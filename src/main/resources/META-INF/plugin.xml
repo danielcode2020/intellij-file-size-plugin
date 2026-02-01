@@ -9,7 +9,27 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.danielcode2020.intellijfilesizeplugin.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-        <postStartupActivity implementation="com.github.danielcode2020.intellijfilesizeplugin.startup.MyProjectActivity" />
+        <notificationGroup
+                id="FileSizePlugin"
+                displayType="BALLOON"
+                isLogByDefault="false" />
     </extensions>
+
+<!--icon-->
+    <actions>
+            <action
+                    id="LogRightClickAction"
+                    class="com.ifsp.action.RightClickViewFileSize"
+                    text="View File Size"
+                    description="Logs when a file is right-clicked">
+
+            <keyboard-shortcut
+                    keymap="$default"
+                    first-keystroke="ctrl 1"/>
+
+            <add-to-group
+                    group-id="ProjectViewPopupMenu"
+                    anchor="last"/>
+        </action>
+    </actions>
 </idea-plugin>
