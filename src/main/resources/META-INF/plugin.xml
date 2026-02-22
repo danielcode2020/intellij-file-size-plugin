@@ -1,7 +1,7 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.danielcode2020.intellijfilesizeplugin</id>
-    <name>intellij-file-size-plugin</name>
+    <id>com.github.danielcode2020.viewfilesize</id>
+    <name>view-file-size</name>
     <vendor>danielcode2020</vendor>
 
     <depends>com.intellij.modules.platform</depends>
