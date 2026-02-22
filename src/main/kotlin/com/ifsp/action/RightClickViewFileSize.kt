@@ -1,14 +1,12 @@
 package com.ifsp.action
 
+import com.intellij.notification.NotificationGroupManager
+import com.intellij.notification.NotificationType
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
-import com.intellij.openapi.diagnostic.thisLogger
-
-import com.intellij.notification.NotificationGroupManager
-import com.intellij.notification.NotificationType
 import com.intellij.openapi.application.ApplicationManager
-import com.intellij.openapi.vfs.isFile
+import com.intellij.openapi.diagnostic.thisLogger
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import java.util.zip.ZipFile
@@ -18,63 +16,26 @@ class RightClickViewFileSize : AnAction("View File Size") {
     private val scheduler = Executors.newSingleThreadScheduledExecutor()
 
     override fun actionPerformed(e: AnActionEvent) {
+
         val file = e.getData(CommonDataKeys.VIRTUAL_FILE)
 
         if (file != null && file.exists()) {
 
             if (file.isDirectory) {
-                val notification = NotificationGroupManager.getInstance()
-                    .getNotificationGroup("FileSizePlugin")
-                    .createNotification(
-                        file.name,
-                        "Directory selected! Must select a file.",
-                        NotificationType.ERROR
-                    )
-
-                notification.notify(e.project)
-
-                scheduler.schedule(
-                    {
-                        ApplicationManager.getApplication().invokeLater {
-                            notification.expire()
-                        }
-                    },
-                    3,
-                    TimeUnit.SECONDS
-                )
+                displayDirectorySelectedErrorNotification(e, file.name)
                 return
             }
 
-            val project = e.project;
-
             thisLogger().warn("Right-click action invoked on file: ${file.path}")
 
+            var message = "Original file size : ${formatSize(file.length)}<br>".trimIndent()
 
-            var message = "Original file size : ${formatSize(file.length)}<br>".trimIndent();
-
-            if (file.extension == "jar") {
+            if (file.extension.equals("jar")) {
                 message+="Unzipped : ${formatSize(calculateUnzippedJarSize(file.path))}<br>"
             }
 
-            val notification = NotificationGroupManager.getInstance()
-                .getNotificationGroup("FileSizePlugin")
-                .createNotification(
-                    file.name,
-                    message,
-                    NotificationType.INFORMATION
-                )
+            displayMessageInfoNotification(e, file.name, message)
 
-            notification.notify(project)
-
-            scheduler.schedule(
-                {
-                    ApplicationManager.getApplication().invokeLater {
-                        notification.expire()
-                    }
-                },
-                10,
-                TimeUnit.SECONDS
-            )
         } else {
             thisLogger().warn("Right-click action invoked, but no file selected")
         }
@@ -105,5 +66,51 @@ class RightClickViewFileSize : AnAction("View File Size") {
             }
             return totalSize
         }
+    }
+
+    private fun displayMessageInfoNotification(e : AnActionEvent, fileName: String, message : String) {
+        val notification = NotificationGroupManager.getInstance()
+            .getNotificationGroup("FileSizePlugin")
+            .createNotification(
+                fileName,
+                message,
+                NotificationType.INFORMATION
+            )
+
+        notification.notify(e.project)
+
+        // The notification will be visible for 10 seconds, then will disappear
+        scheduler.schedule(
+            {
+                ApplicationManager.getApplication().invokeLater {
+                    notification.expire()
+                }
+            },
+            10,
+            TimeUnit.SECONDS
+        )
+    }
+
+    private fun displayDirectorySelectedErrorNotification(e : AnActionEvent, fileName : String){
+        val notification = NotificationGroupManager.getInstance()
+            .getNotificationGroup("FileSizePlugin")
+            .createNotification(
+                fileName,
+                "Directory selected! Must select a file.",
+                NotificationType.ERROR
+            )
+
+        notification.notify(e.project)
+
+        // The notification will be visible for 3 seconds, then will disappear
+        scheduler.schedule(
+            {
+                ApplicationManager.getApplication().invokeLater {
+                    notification.expire()
+                }
+            },
+            3,
+            TimeUnit.SECONDS
+        )
     }
 }
