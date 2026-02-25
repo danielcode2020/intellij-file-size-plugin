@@ -3,6 +3,15 @@
     <id>com.github.danielcode2020.viewfilesize</id>
     <name>view-file-size</name>
     <vendor>danielcode2020</vendor>
+    <description>
+        A very simple and straightforward IntelliJ IDEA plugin that allows to view the size of a selected file.
+
+        You can:
+        • Right-click any file in the Project view and select "View File Size"
+        • Select a file and press Ctrl+1 to display its size
+
+        The file size is shown as a notification balloon inside the IDE.
+    </description>
 
     <depends>com.intellij.modules.platform</depends>
 
