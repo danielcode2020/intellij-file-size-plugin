@@ -18,11 +18,18 @@
 - [ ] Configure the [CODECOV_TOKEN](https://docs.codecov.com/docs/quick-start) secret for automated test coverage reports on PRs
 
 <!-- Plugin description -->
-This Fancy IntelliJ Platform Plugin is going to be your implementation of the brilliant ideas that you have.
+## Plugin Description
 
-This specific section is a source for the [plugin.xml](/src/main/resources/META-INF/plugin.xml) file which will be extracted by the [Gradle](/build.gradle.kts) during the build process.
+**A very simple and straightforward IntelliJ IDEA plugin that allows to view the size of a selected file.**
 
-To keep everything working, do not remove `<!-- ... -->` sections. 
+You can:
+
+• Right-click any file in the Project view and select "View File Size"
+
+• Left-click a file in the Project view and press Ctrl+1 to display its size
+
+The file size is shown as a notification balloon inside the IDE.
+
 <!-- Plugin description end -->
 
 ## Installation
