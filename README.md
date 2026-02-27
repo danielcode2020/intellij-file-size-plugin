@@ -1,8 +1,8 @@
 # intellij-file-size-plugin
 
 ![Build](https://github.com/danielcode2020/intellij-file-size-plugin/workflows/Build/badge.svg)
-[![Version](https://img.shields.io/jetbrains/plugin/v/30318-view-file-siz.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
-[![Downloads](https://img.shields.io/jetbrains/plugin/d/30318-view-file-size.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
+[![Version](https://img.shields.io/jetbrains/plugin/v/30318-view-file-size.svg)](https://plugins.jetbrains.com/plugin/30318-view-file-size)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/30318-view-file-size.svg)](https://plugins.jetbrains.com/plugin/30318-view-file-size)
 
 ## Template ToDo list
 - [x] Create a new [IntelliJ Platform Plugin Template][template] project.
