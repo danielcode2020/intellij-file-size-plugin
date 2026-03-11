@@ -59,15 +59,19 @@ Plugin based on the [IntelliJ Platform Plugin Template][template].
 [docs:plugin-description]: https://plugins.jetbrains.com/docs/intellij/plugin-user-experience.html#plugin-description-and-presentation
 
 ## Building plugin for manual upload 
+1. Update `pluginVersion` property in `gradle.properties` file.
 
-Linux :
-```bash
-./gradlew buildPlugin
-```
-Windows : 
-```shell
-gradlew.bat buildPlugin
-```
 
+2. Build locally the new version.
+
+    Linux :
+    ```bash
+    ./gradlew buildPlugin
+    ```
+    Windows : 
+    ```shell
+    gradlew.bat buildPlugin
+    ```
+    
 The plugin zip will be generated under : 
 `build/distributions/`
