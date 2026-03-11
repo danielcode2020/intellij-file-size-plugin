@@ -75,3 +75,19 @@ Plugin based on the [IntelliJ Platform Plugin Template][template].
     
 The plugin zip will be generated under : 
 `build/distributions/`
+
+## Why this plugin exists?
+
+When building applications such as AWS Lambda functions, there are strict deployment limits (for example, the 250 MB unzipped package size limit).
+
+When adjusting dependencies or working with shaded JARs, I needed to quickly check artifact sizes multiple times.
+
+IntelliJ does provide file size information, but accessing it requires:
+
+- enabling file details in the Project view (3 clicks), and
+
+- disabling it afterwards.
+
+Using the terminal wasn't easier because I had to switch contexts from IDE to builtin terminal and back to make the code changes and to repeat.
+
+This plugin was created to make the process quicker, more convenient and IDE-native.
